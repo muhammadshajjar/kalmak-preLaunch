@@ -1,0 +1,34 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.logo {
+  height: 50px;
+  width: 200px;
+}
+
+.logo img {
+  width: 100%;
+  height: 100%;
+}
+
+.social {
+  display: flex;
+}
+.social li {
+  margin-left: 15px;
+  color: #2d3a64;
+}
+.social li:hover {
+  color: #f6931e;
+}
+
+@media only screen and (max-width: 420px) {
+  .logo {
+    height: 43px;
+    width: 151px;
+  }
+}
