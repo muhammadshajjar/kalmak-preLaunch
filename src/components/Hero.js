@@ -4,16 +4,20 @@ import emailjs from "@emailjs/browser";
 import { ThreeDots } from "react-loader-spinner";
 import "./Hero.css";
 
+import sendEmailToSheet from "../helper/sendDataToGoogleSheet";
+
 import banner from "../assets/banner.png";
+
+const GOOGLE_SHEET_API =
+  "https://v1.nocodeapi.com/shajjar99/google_sheets/bYorwuDurJEpjTno?tabId=Sheet1";
+
 const Hero = () => {
   const [email, setEmail] = useState("");
   const [isSending, setIsSending] = useState(false);
   const [isSuccessFul, setIsSuccessFul] = useState(false);
   const [isFail, setIsFail] = useState(false);
   const form = useRef();
-  const emailInputhandler = (e) => {
-    setEmail(e.target.value);
-  };
+
   const emailSubmitHandler = (e) => {
     e.preventDefault();
     setIsSending(true);
@@ -31,7 +35,7 @@ const Hero = () => {
           if (result.text === "OK") {
             setIsSending(false);
             setIsSuccessFul(true);
-            sendEmailToSheet(email);
+            sendEmailToSheet(email, GOOGLE_SHEET_API);
           }
         },
         (error) => {
@@ -42,23 +46,6 @@ const Hero = () => {
       );
     e.target.reset();
     setEmail("");
-  };
-
-  const sendEmailToSheet = async (email) => {
-    try {
-      const response = await fetch(
-        "https://v1.nocodeapi.com/shajjar99/google_sheets/bYorwuDurJEpjTno?tabId=Sheet1",
-        {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify([[new Date().toLocaleString(), email]]),
-        }
-      );
-
-      if (!response.ok) throw new Error("Unable to send data to sheet!");
-    } catch (err) {
-      console.log(err.message);
-    }
   };
 
   return (
@@ -78,7 +65,7 @@ const Hero = () => {
               <input
                 type="email"
                 placeholder="you@email.com"
-                onChange={emailInputhandler}
+                onChange={(e) => setEmail(e.target.value)}
                 value={email}
                 name="user_email"
               />
