@@ -9,7 +9,7 @@ import sendEmailToSheet from "../helper/sendDataToGoogleSheet";
 import banner from "../assets/banner.png";
 
 const GOOGLE_SHEET_API =
-  "https://v1.nocodeapi.com/shajjar99/google_sheets/bYorwuDurJEpjTno?tabId=Sheet1";
+  "https://v1.nocodeapi.com/teamkalmak/google_sheets/WLjeqxfggzTlNGHD?tabId=Sheet1";
 
 const Hero = () => {
   const [email, setEmail] = useState("");
@@ -23,15 +23,13 @@ const Hero = () => {
     setIsSending(true);
     emailjs
       .sendForm(
-        "service_9yydwfd",
-        "template_i5n1u0c",
+        "service_l6r7t3t",
+        "template_c5hwiwk",
         form.current,
-        "HhA-gjSCWsIVaC0tu"
+        "orCAdXi5wsftCX3FF"
       )
       .then(
         (result) => {
-          console.log(result.text);
-          console.log(result);
           if (result.text === "OK") {
             setIsSending(false);
             setIsSuccessFul(true);
